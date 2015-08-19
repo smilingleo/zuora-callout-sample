@@ -32,7 +32,7 @@ public class Application extends Controller {
     private ReentrantLock lock = new ReentrantLock();
 	
 	public Result index() {
-		return ok("Welcome to callout demo");
+		return ok("Welcome to Zuora callout demo, view /view page please.");
 	}
 	
 	public Result callout() throws ParserConfigurationException, SAXException, IOException {
@@ -42,6 +42,11 @@ public class Application extends Controller {
 
         RequestBody body = request().body();
         String xml = body.asText();
+        System.out.println("body.asText:" + xml 
+        		+ "\nbody.asRaw:" + body.asRaw() 
+        		+ "\nbody.asJson:" + body.asJson()
+        		+ "\nbody.asMultipart" + body.asMultipartFormData()
+        		+ "\nbody.asXml:" + body.asXml());
 		doc = docBuilder.parse(new InputSource(new ByteArrayInputStream(xml.getBytes("utf-8"))));
 		if (body == null || doc == null)
 			return ok("empty");
