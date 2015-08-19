@@ -34,7 +34,7 @@ public class Application extends Controller {
 		return ok("Welcome to Zuora callout demo, view /view page please.");
 	}
 	
-	@BodyParser.Of(BodyParser.Raw.class)
+	@BodyParser.Of(BodyParser.TolerantText.class)
 	public Result callout() throws ParserConfigurationException, SAXException, IOException {
         Document doc = null;
         DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
