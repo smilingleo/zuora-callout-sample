@@ -1,6 +1,6 @@
 @(list: Array[models.RequestMeta])
 
-@main("Welcome to Play") {
+@main("Welcome to Zuora Callout Viewer") {
 	@defining(list.length){ length =>
 		@for(i <- (1 to length)) {
 			@defining(list(i - 1)) { meta =>
