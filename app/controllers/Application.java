@@ -19,6 +19,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import play.libs.Json;
 import play.mvc.BodyParser;
 import play.mvc.Controller;
 import play.mvc.Http.RequestBody;
@@ -83,6 +84,10 @@ public class Application extends Controller {
 
     public Result view() {
         return ok(views.html.index.render(cache));
+    }
+
+    public Result json() {
+        return ok(Json.toJson(cache));
     }
 
 }

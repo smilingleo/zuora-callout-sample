@@ -5,6 +5,7 @@
 # Home page
 GET     /                           controllers.Application.index()
 GET		/view						controllers.Application.view()
+GET		/json						controllers.Application.json()
 POST	/callout					controllers.Application.callout()
 
 # Map static resources from the /public folder to the /assets URL path
