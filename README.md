@@ -11,7 +11,7 @@ This is a sample application which is able to receive callout request from Zuora
 2. Trigger an event which will lead to a callout notification
 3. Open the viewer page and check it out
 
-I have deployed this app to [heroku](https://zuora-callout-viewer.herokuapp.com/view).
+I have deployed this app to [heroku](https://zuora-callout-viewer.herokuapp.com/assets/index.html).
 Of course you can deploy this app to your own site.
 
 ## How to Deploy
