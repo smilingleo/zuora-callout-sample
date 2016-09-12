@@ -11,6 +11,19 @@ This is a sample application which is able to receive callout request from Zuora
 2. Trigger an event which will lead to a callout notification
 3. Open the viewer page and check it out
 
+Some customers are using some middle-wares which always return `200`, but return a meaningful content to tell if the request is successfully handled or not. To simulate this use case, use the following query parameters:
+
++ okAsSuccess (boolean, default to `true`)
++ success (boolean, default to `true`)
+
+For example, you can set the `base url` to **https://zuora-callout-viewer.herokuapp.com/callout?okAsSuccess=false&success=false** to always return `200` with a JSON response as:
+
+```
+{"success": false}
+```
+
+Zuora callout function can parse the JSON and decide if a retry is needed or not. 
+
 I have deployed this app to [heroku](https://zuora-callout-viewer.herokuapp.com/assets/index.html).
 Of course you can deploy this app to your own site.
 
