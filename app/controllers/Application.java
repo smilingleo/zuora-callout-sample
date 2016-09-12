@@ -10,8 +10,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import models.RequestMeta;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -19,6 +17,9 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import com.google.common.collect.ImmutableMap;
+
+import models.RequestMeta;
 import play.libs.Json;
 import play.mvc.BodyParser;
 import play.mvc.Controller;
@@ -78,8 +79,29 @@ public class Application extends Controller {
             }
         }
 
+        boolean okAsSuccess = true;
+        String flag = "okAsSuccess";
+        String resultKey = "success";
+        boolean success = true;
+        if (request().queryString().containsKey(flag)) {
+            String[] values = request().queryString().get(flag);
+            if (values != null && values.length >= 1 && values[0].trim().equalsIgnoreCase("false")) {
+                okAsSuccess = false;
+            }
+
+            if (request().queryString().containsKey(resultKey)) {
+                values = request().queryString().get(resultKey);
+                if (values != null && values.length >= 1 && values[0].trim().equalsIgnoreCase("false")) {
+                    success = false;
+                }
+            }
+        }
+
+
         // only 200 (OK) is considered as a succeeded callout, not '201' or '202'.
-        return ok("Got request " + request() + "!");
+        // but we can also support content based success-determining.
+        return okAsSuccess ? ok("Got request " + request() + "!")
+                : ok(Json.toJson(ImmutableMap.of("success", success)));
     }
 
     public Result view() {
